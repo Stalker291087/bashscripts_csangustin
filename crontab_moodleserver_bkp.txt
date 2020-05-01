@@ -22,4 +22,5 @@
 # m h  dom mon dow   command
 */15 * * * * sudo su daemon -s /bin/sh -c "/opt/bitnami/php/bin/php /opt/bitnami/apps/moodle/htdocs/admin/cli/cron.php > /dev/null"
 */5 * * * * /opt/aws-scripts-mon/mon-put-instance-data.pl  --mem-util --mem-used  --disk-space-util --disk-space-avail --disk-space-used --disk-path=/var/MoodleData --from-cron
-0 12 * * 0 sudo su bitnami /home/bitnami/Automation/services_restart.sh
+0 12 * * 0 sudo su bitnami /home/bitnami/Automation/services_restart_Moodle.sh
+30 12 * * 0 sudo su bitnami /home/bitnami/Automation/mysql_backup.sh
