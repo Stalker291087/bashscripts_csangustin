@@ -24,8 +24,8 @@
 FILE=/var/Moodle_Backups/DB_Dump/minime.sql.`date +"%Y%m%d"`
 DBSERVER=127.0.0.1
 DATABASE=bitnami_moodle
-USER=root
-PASS=CnB0gTsc11QB
+USER=
+PASS=
 
 # (2) do the mysql database backup (dump)
 
