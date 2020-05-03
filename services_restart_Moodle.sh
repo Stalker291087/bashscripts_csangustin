@@ -2,7 +2,7 @@
 
 #----------------------------------------------------------
 # Service restart and backup script.
-# version 2.0, updated May 01, 2020.
+# version 3.0, updated May 03, 2020.
 # contact: jeancarloe01@hotmail.com
 #----------------------------------------------------------
 # This work is licensed under a GPL
@@ -27,12 +27,20 @@ DESTINO=/var/Moodle_Backups/"respaldo_Moodle_"`date +%m_%d_%Y`
 
 echo "**Services stopped at $(date)**" >> ~/Automation/service_restart/service_restart.log
 sudo /opt/bitnami/ctlscript.sh stop >> ~/Automation/service_restart/service_restart.log
-echo "Copying files from $ORIGEN to $DESTINO"
-cp -r $origen $destino
-tar -zcf $destino.tar.gz $destino 2>/dev/null
-rm -r $destino
-echo "Respaldo realizado correctamenten en /var/Moodle_Backups"
-echo "$(ls -l /var/Moodle_Backups/)"
-sudo /opt/bitnami/ctlscript.sh start >> ~/Automation/service_restart/service_restart.log
-echo "**Services started at $(date)**" >> ~/Automation/service_restart/service_restart.log
-echo "**Executed via cron job**" >> ~/Automation/service_restart/service_restart.log
+if [ "$?" -eq 0 ]
+then
+    echo "Copying files from $ORIGEN to $DESTINO"
+    sudo cp -r $ORIGEN $DESTINO
+    sudo tar -zcf $ORIGEN.tar.gz $DESTINO 2>/dev/null
+    sudo rm -r $DESTINO
+    echo "Respaldo realizado correctamenten en /var/Moodle_Backups"
+    echo "$(ls -l /var/Moodle_Backups/)"
+    exit 10
+fi
+
+if [ "$?" -eq 10 ]
+then
+    sudo /opt/bitnami/ctlscript.sh start >> ~/Automation/service_restart/service_restart.log
+    echo "**Services started at $(date)**" >> ~/Automation/service_restart/service_restart.log
+    echo "**Executed via cron job**" >> ~/Automation/service_restart/service_restart.log
+fi
