@@ -15,3 +15,5 @@ if [ "$?" -eq "0" ]
 		echo "Failure Restarting Grafana Service" >> /home/ubuntu/Automation/monitoring/grafana_service.log
 fi
 echo "**Executed via cron job**" >> /home/ubuntu/Automation/monitoring/grafana_service.log
+
+sudo reboot -h
