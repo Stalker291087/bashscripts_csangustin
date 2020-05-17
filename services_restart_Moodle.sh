@@ -30,8 +30,8 @@ sudo /opt/bitnami/ctlscript.sh stop >> ~/Automation/service_restart/service_rest
 if [ "$?" -eq 0 ]
 then
     echo "Copying files from $ORIGEN to $DESTINO"
-    sudo cp -r $ORIGEN $DESTINO
-    sudo tar -zcf $ORIGEN.tar.gz $DESTINO 2>/dev/null
+    sudo cp -rp $ORIGEN $DESTINO
+    sudo tar -zcf $DESTINO.tar.gz $DESTINO
     sudo rm -r $DESTINO
     echo "Respaldo realizado correctamenten en /var/Moodle_Backups"
     echo "$(ls -l /var/Moodle_Backups/)"
