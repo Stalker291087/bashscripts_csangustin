@@ -22,7 +22,7 @@
 
 # Definicion de variables para realizar el respaldo de Moodle Data
 ORIGEN=/home/bitnami/apps/moodle/htdocs
-DESTINO=/var/Moodle_Backups/"respaldo_Moodle_"`date +%m_%d_%Y`
+DESTINO=/var/Moodle_Backups/MoodleData_Backup/"respaldo_Moodle_"`date +%m_%d_%Y`
 
 
 echo "**Services stopped at $(date)**" >> ~/Automation/service_restart/service_restart.log
@@ -33,14 +33,9 @@ then
     sudo cp -rp $ORIGEN $DESTINO
     sudo tar -zcf $DESTINO.tar.gz $DESTINO
     sudo rm -r $DESTINO
-    echo "Respaldo realizado correctamenten en /var/Moodle_Backups"
-    echo "$(ls -l /var/Moodle_Backups/)"
-    exit 10
+    echo "Respaldo realizado correctamenten en /var/Moodle_Backups" >> ~/Automation/service_restart/service_restart.log
+    echo "$(ls -l /var/Moodle_Backups/)" >> ~/Automation/service_restart/service_restart.log
+    echo "**Script executed correctly at $(date)**" >> ~/Automation/service_restart/service_restart.log
 fi
 
-if [ "$?" -eq 10 ]
-then
-    sudo /opt/bitnami/ctlscript.sh start >> ~/Automation/service_restart/service_restart.log
-    echo "**Services started at $(date)**" >> ~/Automation/service_restart/service_restart.log
-    echo "**Executed via cron job**" >> ~/Automation/service_restart/service_restart.log
-fi
+sudo reboot -h
