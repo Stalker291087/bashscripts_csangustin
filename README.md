@@ -1,4 +1,4 @@
-# Moodle proyect in AWS with EC2
+# Moodle project in AWS with EC2
 
 Configuration files and scripts for Moodle in AWS.
 
