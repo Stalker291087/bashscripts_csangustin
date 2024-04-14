@@ -1,3 +1,0 @@
-# Create Dump of bitnami_moodle Database
-
-mysqldump -u root -p bitnami_moodle > /var/Moodle_Backups/DB_Dump/Moodle_DB-$(date +%F).sql
